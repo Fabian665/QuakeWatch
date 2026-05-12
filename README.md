@@ -18,6 +18,8 @@
 
 ```text
 QuakeWatch/
+├── Dockerfile               # Dockerfile to for building production image
+├── Dockerfile.dockerignore  # Dockerfile ignore
 ├── README.md                # This README
 ├── dashboard.py             # Blueprint & route definitions using OOP style
 ├── main.py                  # Application factory and entry point
@@ -62,6 +64,20 @@ QuakeWatch/
 2. **Access the Application:**
 
    Open your browser and visit [http://127.0.0.1:5000](http://127.0.0.1:5000) to view the dashboard.
+
+## Docker
+
+### Building the Docker Image
+
+```sh
+docker build -t quakewatch .
+```
+
+### Running the Image
+
+```sh
+docker run --rm --name quakewatch -d -p 5000:5000 quakewatch
+```
 
 ## Custom Jinja2 Filter
 
