@@ -37,7 +37,7 @@ QuakeWatch/
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/QuakeWatch.git
+   git clone https://github.com/fabian665/QuakeWatch.git
    cd QuakeWatch
    ```
 
