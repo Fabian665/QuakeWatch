@@ -1,4 +1,4 @@
-FROM ghcr.io/astral-sh/uv:python3.12-trixie-slim AS builder
+FROM ghcr.io/astral-sh/uv:python3.14-alpine3.23 AS builder
 
 WORKDIR /app
 
@@ -15,17 +15,16 @@ COPY . .
 
 RUN uv sync --frozen --no-dev
 
-FROM python:3.12-slim-trixie
+FROM python:3.14.5-alpine3.23
 
 WORKDIR /app
 
 ENV PATH="/app/.venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
 
-COPY --from=builder /app /app
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-RUN useradd --create-home appuser \
-    && chown -R appuser /app
+COPY --chown=appuser:appgroup --from=builder /app /app
 
 USER appuser
 
