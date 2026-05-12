@@ -16,18 +16,22 @@
 
 ## Project Structure
 
-```
+```text
 QuakeWatch/
-├── app.py                  # Application factory and entry point
-├── dashboard.py            # Blueprint & route definitions using OOP style
-├── utils.py                # Helper functions and custom Jinja2 filters
-├── requirements.txt        # Python dependencies
+├── README.md                # This README
+├── dashboard.py             # Blueprint & route definitions using OOP style
+├── main.py                  # Application factory and entry point
+├── utils.py                 # Helper functions and custom Jinja2 filters
+├── pyproject.toml           # Python project definiton
+├── requirements.txt         # Python dependencies
 ├── static/
-│   └── experts-logo.svg    # Logo file used in the UI
-└── templates/              # Jinja2 HTML templates
-    ├── base.html           # Base template with common layout and navigation
-    ├── main_page.html      # Home page content
-    └── graph_dashboard.html# Dashboard view with graphs and earthquake details
+│   └── experts-logo.svg     # Logo file used in the UI
+├── templates/               # Jinja2 HTML templates
+│   ├── base.html            # Base template with common layout and navigation
+│   ├── index.html
+│   ├── main_page.html       # Home page content
+│   └── graph_dashboard.html # Dashboard view with graphs and earthquake details
+└── uv.lock                  # uv lockfile
 ```
 
 ## Installation
@@ -41,17 +45,10 @@ QuakeWatch/
    cd QuakeWatch
    ```
 
-2. **Set Up a Virtual Environment (optional but recommended):**
+2. **Setup uv environment**
 
    ```bash
-   python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install Dependencies:**
-
-   ```bash
-   pip install -r requirements.txt
+   uv sync
    ```
 
 ## Running the Application Locally
@@ -59,13 +56,12 @@ QuakeWatch/
 1. **Start the Flask Application:**
 
    ```bash
-   python app.py
+   uv run main.py
    ```
 
 2. **Access the Application:**
 
    Open your browser and visit [http://127.0.0.1:5000](http://127.0.0.1:5000) to view the dashboard.
-
 
 ## Custom Jinja2 Filter
 
