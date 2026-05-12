@@ -79,6 +79,12 @@ docker build -t quakewatch .
 docker run --rm --name quakewatch -d -p 5000:5000 quakewatch
 ```
 
+### Using Docker Compose
+
+```sh
+docker compose up --watch
+```
+
 ## Custom Jinja2 Filter
 
 The project includes a custom filter `timestamp_to_str` that converts epoch timestamps to human-readable strings. This filter is registered during application initialization and is used in the templates to format earthquake event times.
