@@ -26,6 +26,8 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 COPY --chown=appuser:appgroup --from=builder /app /app
 
+RUN chown appuser:appgroup /app
+
 USER appuser
 
 CMD ["python", "main.py"]
