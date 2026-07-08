@@ -1,7 +1,7 @@
 [project]
 name = "quakewatch"
 version = "1.0.0"
-description = "Add your description here"
+description = "Flask dashboard for USGS earthquake data"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

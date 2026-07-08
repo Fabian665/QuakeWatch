@@ -35,9 +35,9 @@ class EarthquakeDashboard:
     @dashboard_blueprint.route('/info')
     def info():
         app_info = {
-            'name': 'Sample Flask App',
+            'name': 'QuakeWatch',
             'version': '1.0',
-            'author': 'Your Name',
+            'author': 'Roy Fabian',
             'description': 'A sample Flask application demonstrating multiple routes'
         }
         return jsonify(app_info), 200

@@ -1,2 +1,11 @@
 .venv/
 .rumdl_cache/
+logs/
+__pycache__/
+*.py[cod]
+.env
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/

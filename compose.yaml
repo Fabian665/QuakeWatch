@@ -2,7 +2,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8888:8888"
     develop:
       watch:
         - action: sync+restart
@@ -12,5 +12,6 @@ services:
             - pyproject.toml
             - requirements.txt
             - README.md
+            - k8s/
         - action: rebuild
           path: uv.lock

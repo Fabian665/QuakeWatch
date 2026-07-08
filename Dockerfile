@@ -32,4 +32,4 @@ ENV QUAKE_PORT="8888"
 
 USER appuser
 
-CMD ["python", "main.py"]
+CMD ["python", "app/main.py"]

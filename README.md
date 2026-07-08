@@ -18,29 +18,33 @@
 
 ```text
 QuakeWatch/
-├── Dockerfile               # Dockerfile to for building production image
-├── Dockerfile.dockerignore  # Dockerfile ignore
-├── README.md                # This README
-├── compose.yaml             # Docker Compose configuration
-├── dashboard.py             # Blueprint & route definitions using OOP style
-├── main.py                  # Application factory and entry point
-├── utils.py                 # Helper functions and custom Jinja2 filters
-├── pyproject.toml           # Python project definiton
-├── requirements.txt         # Python dependencies
-├── quakewatch-configmap.yaml     # Kubernetes ConfigMap for non-sensitive config
-├── quakewatch-crontab.yaml       # Kubernetes CronJob for scheduled tasks
-├── quakewatch-deployment.yaml    # Kubernetes Deployment manifest
-├── quakewatch-hpa.yaml           # Kubernetes Horizontal Pod Autoscaler
-├── quakewatch-secret.yaml        # Kubernetes Secret for sensitive data
-├── quakewatch-service.yaml       # Kubernetes Service manifest
-├── static/
-│   └── experts-logo.svg     # Logo file used in the UI
-├── templates/               # Jinja2 HTML templates
-│   ├── base.html            # Base template with common layout and navigation
-│   ├── index.html
-│   ├── main_page.html       # Home page content
-│   └── graph_dashboard.html # Dashboard view with graphs and earthquake details
-└── uv.lock                  # uv lockfile
+├── app/
+│   ├── main.py              # Application factory and entry point
+│   ├── dashboard.py         # Blueprint & route definitions using OOP style
+│   ├── utils.py             # Helper functions and custom Jinja2 filters
+│   ├── templates/           # Jinja2 HTML templates
+│   │   ├── base.html        # Base template with common layout and navigation
+│   │   ├── index.html
+│   │   ├── main_page.html   # Home page content
+│   │   └── graph_dashboard.html # Dashboard view with graphs and earthquake details
+│   └── static/
+│       └── experts-logo.svg # Logo file used in the UI
+├── k8s/
+│   ├── quakewatch-configmap.yaml     # Kubernetes ConfigMap for non-sensitive config
+│   ├── quakewatch-crontab.yaml       # Kubernetes CronJob for scheduled tasks
+│   ├── quakewatch-deployment.yaml    # Kubernetes Deployment manifest
+│   ├── quakewatch-hpa.yaml           # Kubernetes Horizontal Pod Autoscaler
+│   ├── quakewatch-secret.yaml        # Kubernetes Secret for sensitive data
+│   └── quakewatch-service.yaml       # Kubernetes Service manifest
+├── .dockerignore             # Docker ignore file
+├── .gitignore                # Git ignore file
+├── Dockerfile                # Dockerfile for building production image
+├── compose.yaml              # Docker Compose configuration
+├── pyproject.toml            # Python project definition
+├── requirements.txt          # Python dependencies
+├── uv.lock                   # uv lockfile
+├── .python-version           # Python version file
+└── README.md                 # This README
 ```
 
 ## Installation
@@ -65,12 +69,12 @@ QuakeWatch/
 1. **Start the Flask Application:**
 
    ```bash
-   QUAKE_PORT=5000 uv run main.py
+   QUAKE_PORT=8888 uv run app/main.py
    ```
 
 2. **Access the Application:**
 
-   Open your browser and visit [http://127.0.0.1:5000](http://127.0.0.1:5000) to view the dashboard.
+   Open your browser and visit [http://127.0.0.1:8888](http://127.0.0.1:8888) to view the dashboard.
 
 ## Docker
 
@@ -83,7 +87,7 @@ docker build -t rfabian665/quakewatch .
 ### Running the Image
 
 ```sh
-docker run --rm --name quakewatch -d -p 5000:8888 rfabian665/quakewatch
+docker run --rm --name quakewatch -d -p 8888:8888 rfabian665/quakewatch
 ```
 
 ### Using Docker Compose
@@ -97,13 +101,18 @@ docker compose up --watch
 Deploy to a Kubernetes cluster with the following command:
 
 ```sh
-kubectl apply \
-  -f quakewatch-hpa.yaml \
-  -f quakewatch-secret.yaml \
-  -f quakewatch-crontab.yaml \
-  -f quakewatch-service.yaml \
-  -f quakewatch-configmap.yaml \
-  -f quakewatch-deployment.yaml
+kubectl apply -f k8s/
+```
+
+Alternatively, apply specific manifests:
+
+```sh
+kubectl apply -f k8s/quakewatch-hpa.yaml
+kubectl apply -f k8s/quakewatch-secret.yaml
+kubectl apply -f k8s/quakewatch-crontab.yaml
+kubectl apply -f k8s/quakewatch-service.yaml
+kubectl apply -f k8s/quakewatch-configmap.yaml
+kubectl apply -f k8s/quakewatch-deployment.yaml
 ```
 
 ### ConfigMap and Secret Management
