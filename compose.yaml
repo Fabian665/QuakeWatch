@@ -11,5 +11,6 @@ services:
           ignore:
             - pyproject.toml
             - requirements.txt
+            - README.md
         - action: rebuild
           path: uv.lock

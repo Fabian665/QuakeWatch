@@ -70,13 +70,13 @@ QuakeWatch/
 ### Building the Docker Image
 
 ```sh
-docker build -t quakewatch .
+docker build -t rfabian665/quakewatch .
 ```
 
 ### Running the Image
 
 ```sh
-docker run --rm --name quakewatch -d -p 5000:5000 quakewatch
+docker run --rm --name quakewatch -d -p 5000:5000 rfabian665/quakewatch
 ```
 
 ### Using Docker Compose
