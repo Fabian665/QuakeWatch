@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: health-check
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          containers:
+            - name: ping
+              image: busybox:1.28
+              env:
+                - name: QUAKE_PORT
+                  valueFrom:
+                    configMapKeyRef:
+                      name: quakewatch-config
+                      key: quake_port
+              command:
+                - /bin/sh
+                - -c
+                - "wget -qO- -T 5 http://quakewatch:$QUAKE_PORT/health || exit 1"
+          restartPolicy: OnFailure

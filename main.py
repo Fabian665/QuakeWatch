@@ -10,6 +10,7 @@ from utils import timestamp_to_str  # Import our custom filter
 
 def create_app():
     app = Flask(__name__)
+    app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 
     # -------------------------
     # Logging Configuration
@@ -46,4 +47,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port=int(os.getenv("QUAKE_PORT", 0)), debug=True)

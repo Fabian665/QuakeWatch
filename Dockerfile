@@ -28,6 +28,8 @@ COPY --chown=appuser:appgroup --from=builder /app /app
 
 RUN chown appuser:appgroup /app
 
+ENV QUAKE_PORT="8888"
+
 USER appuser
 
 CMD ["python", "main.py"]

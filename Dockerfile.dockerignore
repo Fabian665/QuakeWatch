@@ -4,3 +4,4 @@ README.md
 Dockerfile*
 .rumdl_cache/
 **/*.pyc
+quakewatch-*.yaml
